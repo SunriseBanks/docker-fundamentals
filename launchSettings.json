@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "globomantics.identityserver",
+      "composeLaunchUrl": "https://www-local.globomantics.com:44395",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "globomantics.identityserver": "StartDebugging",
+        "reverseproxy": "StartWithoutDebugging",
+        "seq-logging": "StartWithoutDebugging",
+        "globomantics.ui": "StartDebugging",
+        "smtp-mail": "StartWithoutDebugging",
+        "mssql": "StartWithoutDebugging"
+      }
+    }
+  }
+}

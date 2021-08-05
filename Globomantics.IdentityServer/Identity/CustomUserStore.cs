@@ -161,8 +161,7 @@ WHERE UserId = @UserId",
             if (userId == null)
             {
                 throw new ArgumentNullException(nameof(userId));
-            }            
-
+            }
             return await _db.QuerySingleOrDefaultAsync<CustomUser>(
                 "SELECT * FROM GlobomanticsUser WHERE UserId = @userId",
                 new { userId });
@@ -176,7 +175,6 @@ WHERE UserId = @UserId",
             {
                 throw new ArgumentNullException(nameof(normalizedUserName));
             }
-            
             var result = await _db.QuerySingleOrDefaultAsync<CustomUser>(
                 "SELECT * FROM GlobomanticsUser WHERE LoginName = @LoginName",
                 new { LoginName = normalizedUserName });

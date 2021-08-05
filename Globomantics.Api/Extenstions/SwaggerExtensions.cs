@@ -23,17 +23,16 @@ namespace Globomantics.Api.Extenstions
             return services;
         }
 
-        public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app, string virtualPath, 
-            IConfiguration config, IApiVersionDescriptionProvider provider)
+        public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app, IConfiguration config, IApiVersionDescriptionProvider provider)
         {
             var clientId = config.GetValue<string>("AuthN:SwaggerClientId");
             app
                 .UseSwagger()
                 .UseSwaggerUI(options =>
-                {                    
+                {
                     foreach (var description in provider.ApiVersionDescriptions)
                     {
-                        options.SwaggerEndpoint($"{virtualPath}/swagger/{description.GroupName}/swagger.json", $"Globomantics API {description.GroupName.ToUpperInvariant()}");
+                        options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", $"Globomantics API {description.GroupName.ToUpperInvariant()}");
                         options.RoutePrefix = string.Empty;
                     }
                     options.DocumentTitle = "Globomantics API Documentation";
@@ -58,8 +57,6 @@ namespace Globomantics.Api.Extenstions
 
         public void Configure(SwaggerGenOptions options)
         {
-            //options.AddServer(new OpenApiServer { Url = "https://www-local.globomantics.com:44395/api/" });
-
             var disco = GetDiscoveryDocument();
 
             var apiScope = _config.GetValue<string>("AuthN:ApiName");
